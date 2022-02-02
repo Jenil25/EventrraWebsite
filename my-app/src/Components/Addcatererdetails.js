@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Addvenuedetails = () => {
+const Addcatererdetails = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [aid, setAId] = useState("");
-  const [capacity, setCapacity] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [ownername, setOwnerName] = useState("");
-  const [city, setCity] = useState([""]);
   let temp;
+  const [city, setCity] = useState([""]);
   useEffect(() => {
     const getCity = async () => {
       const res = await axios.post(
@@ -22,6 +21,7 @@ const Addvenuedetails = () => {
     };
     getCity();
   }, []);
+  
   const [address, setAddress] = useState([""]);
   const getAddress = async () => {
     console.log("TEMP:");
@@ -54,10 +54,12 @@ const Addvenuedetails = () => {
     temp = city[e.target.selectedIndex - 1].CId;
     getAddress();
   };
-  const addvenue = async (e) => {
+
+
+  const addcaterer = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      "https://eventrra.000webhostapp.com/Admin/uploadVenue.php",
+      "https://eventrra.000webhostapp.com/Admin/uploadCaterers.php",
       {
         method: "POST",
         headers: {
@@ -66,7 +68,6 @@ const Addvenuedetails = () => {
         body: new URLSearchParams({
           name: name,
           aid: parseInt(aid),
-          capacity: parseInt(capacity),
           email: email,
           contact: parseInt(contact),
           ownername: ownername,
@@ -75,8 +76,8 @@ const Addvenuedetails = () => {
     );
     const data = await res.text();
     if (data == "success") {
-      window.alert("Venue Added successfully !!");
-      navigate("/addvenue");
+      window.alert("Caterer Added successfully !!");
+      navigate("/addcaterer");
     } else {
       console.log("Data:",res)
       window.alert("Error !! Please Reenter the details !! ");
@@ -84,10 +85,10 @@ const Addvenuedetails = () => {
   };
 
   return (
-    <div class="addvenuedetail-form">
-      <section className="venuedetail">
+    <div class="addcatererdetail-form">
+      <section className="catererdetail">
         <div className="container" id="cont-box">
-          <header>Add Venue Details</header>
+          <header>Add caterer Details</header>
           <form method="POST">
             <br />
             <input
@@ -95,7 +96,7 @@ const Addvenuedetails = () => {
               name="name"
               id="name"
               autoComplete="off"
-              placeholder="Enter Venue Name"
+              placeholder="Enter caterer Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -132,16 +133,6 @@ const Addvenuedetails = () => {
             </select>
             <br />
             <input
-              type="text"
-              name="capacity"
-              id="capacity"
-              autoComplete="off"
-              placeholder="Enter Venue Capacity"
-              value={capacity}
-              onChange={(e) => setCapacity(e.target.value)}
-            />
-            <br />
-            <input
               type="email"
               name="email"
               id="email"
@@ -156,7 +147,7 @@ const Addvenuedetails = () => {
               name="contact"
               id="contact"
               autoComplete="off"
-              placeholder="Enter venue contact"
+              placeholder="Enter caterer contact"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
@@ -166,7 +157,7 @@ const Addvenuedetails = () => {
               name="ownername"
               id="ownername"
               autoComplete="off"
-              placeholder="Enter venue owner"
+              placeholder="Enter caterer owner"
               value={ownername}
               onChange={(e) => setOwnerName(e.target.value)}
             />
@@ -176,7 +167,7 @@ const Addvenuedetails = () => {
               name="add"
               id="add"
               value="ADD"
-              onClick={addvenue}
+              onClick={addcaterer}
             ></input>
           </form>
           <br />
@@ -185,4 +176,4 @@ const Addvenuedetails = () => {
     </div>
   );
 };
-export default Addvenuedetails;
+export default Addcatererdetails;

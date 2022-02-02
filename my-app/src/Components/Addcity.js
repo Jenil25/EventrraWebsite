@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import axios from "axios";
+import './Assets/managecity.css'
 
 const Addcity = () => {
     const navigate = useNavigate();
@@ -46,10 +47,9 @@ const Addcity = () => {
   
   
     return(
-        <div>
-            <header>Add City</header>
-            <br/><br/>
-                <div>
+        <div className="container-managecity">
+            <br/><br/><center><h1>All Cities</h1></center>
+                <div><br/><br/>
                 <center>
                 <table bordered className="table-city">
                 <thead>
@@ -64,10 +64,15 @@ const Addcity = () => {
                 </thead>
                 <tbody>{cityData}</tbody>
                 </table>
+                <br/><br/>
+                <button className="btn btn-light btn-lg" onClick={addcitydetails}>Add New City</button>
+
                 </center>
         </div>
-        <br/><br/>
-        <button onClick={addcitydetails}>Add New City</button>
+        <section className="back2">
+               <center> <NavLink to="/adminhome" className="back2">Back</NavLink></center>
+                <br />
+            </section>
         </div>
     );
 };

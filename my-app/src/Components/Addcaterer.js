@@ -1,10 +1,11 @@
 import React, { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const Addvenue = () => {
+
+const Addcaterer = () => {
     const navigate = useNavigate();
-    const addvenuedetails = async (e) => {
-        navigate('/Addvenuedetails');
+    const addcatererdetails = async (e) => {
+        navigate('/Addcatererdetails');
     } 
 
     const [city, setCity] = useState([""]);
@@ -19,12 +20,12 @@ const Addvenue = () => {
   }, []);
 
    
-    const [venue, setVenue] = useState([""]);
-    const getVenue = async () => {
+    const [caterer, setCaterer] = useState([""]);
+    const getCaterer = async () => {
       console.log("TEMP:");
       console.log(temp);
       const res = await fetch(
-        "https://eventrra.000webhostapp.com/Admin/getAllVenues.php",
+        "https://eventrra.000webhostapp.com/Admin/getAllCaterers.php",
         {
           method: "POST",
           headers: {
@@ -39,41 +40,40 @@ const Addvenue = () => {
           return response.json();
         })
         .then(function (data) {
-          setVenue(data);
+          setCaterer(data);
         });
     };
   
     let temp;
-    const [cid, setCId] = useState(venue?.CId);
+    const [cid, setCId] = useState(caterer?.CId);
     useEffect(() => {
-      setCId(venue?.CId);
-    }, [venue?.CId]);
+      setCId(caterer?.CId);
+    }, [caterer?.CId]);
   
-    const changeVenue = (e) => {
+    const changeCaterer = (e) => {
       temp = city[e.target.selectedIndex - 1].CId;
-      getVenue();
+      getCaterer();
     };
   
-    if (venue) {
-      var venueData = venue.map((val, i) => (
+    if (caterer) {
+      var catererData = caterer.map((val, i) => (
         <tr key={i}>
-          <td key={val.VId} className="clm1">
+          <td key={val.CaId} className="clm1">
             {i + 1}
           </td>
           <td className="clm2">{val.Name}</td>
           <td className="clm3">{val.AId}</td>
-          <td className="clm4">{val.Capacity}</td>
-          <td className="clm5">{val.Email}</td>
-          <td className="clm6">{val.Contact}</td>
-          <td className="clm7">{val.OwnerName}</td>
-          <td className="clm8">
+          <td className="clm4">{val.Email}</td>
+          <td className="clm5">{val.Contact}</td>
+          <td className="clm6">{val.OwnerName}</td>
+          <td className="clm7">
             <button className="btn btn-primary">Edit</button>&ensp;
             <button className="btn btn-danger">Delete</button>
           </td>
         </tr>
       ));
     } else {
-      venueData = (
+      catererData = (
         <tr>
           <td colSpan="4">No Records Found</td>
         </tr>
@@ -83,7 +83,7 @@ const Addvenue = () => {
   
     return(
         <div>
-            <header>Add Venue</header>
+            <header>Add Caterer</header>
             <br/><br/>
             <div>
             <center>
@@ -93,7 +93,7 @@ const Addvenue = () => {
                 onChange={(e) => {
                   if (e.target.selectedIndex != 0) {
                     setCId(city[e.target.selectedIndex - 1].CId);
-                    changeVenue(e);
+                    changeCaterer(e);
                   }
                 }}
               >
@@ -113,20 +113,19 @@ const Addvenue = () => {
                     <th className="clm1">#</th>
                     <th className="clm2">Name</th>
                     <th className="clm3">AId</th>
-                    <th className="clm4">Capacity</th>
-                    <th className="clm5">Email</th>
-                    <th className="clm6">Contact</th>
-                    <th className="clm7">OwnerName</th>
-                    <th className="clm8">Action</th>
+                    <th className="clm4">Email</th>
+                    <th className="clm5">Contact</th>
+                    <th className="clm6">OwnerName</th>
+                    <th className="clm7">Action</th>
                 </tr>
                 </thead>
-                <tbody>{venueData}</tbody>
+                <tbody>{catererData}</tbody>
                 </table>
                 </center>
         </div>
         <br/><br/>
-        <button onClick={addvenuedetails}>Add New Venue</button>
+        <button onClick={addcatererdetails}>Add New Caterer</button>
         </div>
     );
 };
-export default Addvenue
+export default Addcaterer
