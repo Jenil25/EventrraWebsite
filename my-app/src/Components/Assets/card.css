@@ -1,0 +1,42 @@
+.adminHome{
+    margin-left:-110px;
+    /* background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url("images/bg7.jpg"); */
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px;
+}
+.card{
+    transition: 0.2s;
+}
+.card:hover{
+    transform: translateY(-0.5%);
+    box-shadow: 0 4rem 8rem rgba(0,0,0,0.5);
+}
+.adminHome button{
+    margin: 35px 0px 30px 70px; 
+    height: 60px;
+    width: 200px;
+    font-size: 20px;
+    color: rgb(26, 24, 24);
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: #cdcdd4;
+    border-radius: 3px;
+    border: 1px solid #18191a;
+    transition: .5s;
+}
+
+header{
+    margin-top: 20px;
+    align-items: center; 
+    justify-content: center;
+    display: flex;
+    font-family: sans-serif;
+    position: relative; 
+    font-weight: bold;
+    font-size: 50px;
+    text-decoration:underline;
+}

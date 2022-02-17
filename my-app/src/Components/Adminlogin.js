@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from "react";
 import { NavLink,useNavigate } from 'react-router-dom'
+import './Assets/adminLogin.css'
 
 
 const Adminlogin = () => {
@@ -32,17 +33,12 @@ const Adminlogin = () => {
   };
 
   return (
-    <div class="signin-form">
-      <section className="signin">
-        <div className="container" id="cont-box">
-          <header>Admin-SignIn</header>
-          <form method="POST">
-            <br />
-            <div className="form-group">
-              <span className="symbol">
-                <i class="zmdi zmdi-email material-icons-name"></i>
-              </span>
-              &nbsp;&nbsp;&nbsp;
+    <div className="container">
+    <div className="header">
+      <h1 className="label">Admin SignIn</h1>
+    </div>
+          <form className="adminSignin_form" method="POST">
+            <div className="font">Email</div>  
               <input
                 type="email"
                 name="email"
@@ -52,13 +48,7 @@ const Adminlogin = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
-            <br />
-            <div className="form-group space">
-              <span className="symbol">
-                <i class="zmdi zmdi-lock material-icons-name"></i>
-              </span>
-              &nbsp;&nbsp;&nbsp;
+            <div className="font font2">Password:</div>  
               <input
                 type="password"
                 name="password"
@@ -68,9 +58,7 @@ const Adminlogin = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-            <br />
-            <div className="form-group">
+          
               <input
                 type="submit"
                 name="signin"
@@ -78,12 +66,9 @@ const Adminlogin = () => {
                 value="Login"
                 onClick={loginUser}
               ></input>
-            </div>
           </form>
           <br />
         </div>
-      </section>
-    </div>
   );
 };
 

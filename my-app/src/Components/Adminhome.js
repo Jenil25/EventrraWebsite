@@ -1,5 +1,8 @@
 import React, { useEffect, useState} from "react";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
 import { useNavigate } from "react-router-dom";
+import './Assets/card.css';
 
 const Adminhome = () => {
     const navigate = useNavigate();
@@ -26,18 +29,69 @@ const Adminhome = () => {
     return(
         <div>
             <header>Admin Home</header>
-            <button onClick={addcity}>Manage Cities</button>
+            <div className="adminHome">
+            <Card className= "card" className= "card" style={{
+            width: '20rem',
+            height: '20rem',
+            marginLeft: '180px',
+            }}>
+            <img src="/images/bg7.jpg" height="200" width="400"></img>
+            
+                <button onClick={addcity}>Manage Cities</button>
+            
+            </Card>
             <br/><br/>
+            <Card className= "card" className= "card" style={{
+            width: '20rem',
+            height: '20rem',
+            marginLeft: '600px',
+            marginTop: '-370px'
+            }}>
+            <img src="/images/bg7.jpg" height="200" width="400"></img>
             <button onClick={addaddress}>Manage Addresses</button>
+            </Card>
             <br/><br/>
+            <Card className= "card" className= "card" style={{
+            width: '20rem',
+            height: '20rem',
+            marginLeft: '1000px',
+            marginTop: '-370px'
+            }}>
+            <img src="/images/bg7.jpg" height="200" width="400"></img>
             <button onClick={addvenue}>Manage Venues</button>
+            </Card>
             <br/><br/>
+            <Card className= "card" className= "card" style={{
+            width: '20rem',
+            height: '20rem',
+            marginLeft: '180px',
+            }}>
+            <img src="/images/bg7.jpg" height="200" width="400"></img>
             <button onClick={addcaterer}>Manage Caterers</button>
+            </Card>
             <br/><br/>
+            <Card className= "card" className= "card" style={{
+            width: '20rem',
+            height: '20rem',
+            marginLeft: '600px',
+            marginTop: '-370px'
+            }}>
+            <img src="/images/bg7.jpg" height="200" width="400"></img>
             <button onClick={adddecorator}>Manage Decorators</button>
+            </Card>
             <br/><br/>
+            <Card className= "card" className= "card" style={{
+            width: '20rem',
+            height: '20rem',
+            marginLeft: '1000px',
+            marginTop: '-370px'
+            }}>
+            <img src="/images/bg7.jpg" height="200" width="400"></img>
             <button onClick={addorchestra}>Manage Orchestras</button>
+            </Card>
         </div>
+        </div>
+        
     );
 };
 export default Adminhome 
