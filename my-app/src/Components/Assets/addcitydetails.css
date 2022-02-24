@@ -1,0 +1,70 @@
+.addcitydetail-box{
+    height: 700px;
+    background: #dedede;
+}
+.label3{
+    font-size: 35px;
+    font-weight: bolder;
+    color: #4d232a;
+}
+.container-addcitydetail{
+    font-family: sans-serif;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width:450px;
+    height: 400px;
+    transform: translate(-50% , -50%);
+    text-align: center;
+    align-items: center;
+    z-index: 999;
+    padding: 20px 20px;
+    /* background: rgba(255,255,255,0.04); */
+    background: rgba(255,255,255,0.94);
+    /* box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75); */
+}
+
+strong{
+    float:left;
+    color: #4d232a;
+}
+input[type='text']{
+    width:270px;
+    height:33px;
+    float:left;
+    margin-top:2%;
+    display: flex;
+}
+.link a{
+    color: black;
+}
+
+.container-addcitydetail header{
+    color: black;
+    font-size: 33px;
+    margin: 0 0 35px 0;
+    font-family: sans-serif;
+
+}
+
+input[type='submit']{
+    width: 125px;
+    height: 40px;
+    margin-left: -70px;
+}
+
+/* input[type='submit']:hover{
+    background-color: #c2cffc;
+    
+} */
+.addcitydetail{
+    margin-top: 25px;
+    margin-left: 30px;
+    font-size: 19px;
+    height:45px;
+}
+.back{
+    color:black;
+    font-size:1.5rem;
+    margin-top: 32%;
+}
