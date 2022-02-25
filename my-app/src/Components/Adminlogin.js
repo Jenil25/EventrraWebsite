@@ -25,6 +25,7 @@ const Adminlogin = () => {
     );
     const data = await res.text();
     if (data == "success") {
+      sessionStorage.setItem('email',email);
       window.alert("Admin Login successfull");
       navigate('/adminhome');
     } else {
