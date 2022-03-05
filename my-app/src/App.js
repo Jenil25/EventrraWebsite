@@ -10,19 +10,24 @@ import Addcitydetails from "./Components/Addcitydetails";
 import Editcity from "./Components/Editcity";
 import RequestedVenues from "./Components/RequestedVenues";
 import RequestedCaterers from "./Components/RequestedCaterers";
+import Viewpending from "./Components/Viewpending";
+import RequestedEventType from "./Components/RequestedEventType";
 import { NavLink,Routes, Route,Navigate } from "react-router-dom";
 
 const App = () => {
+  // var login="";       
   return (
+     
     <div>
+      
       {/* <>
         <Home1 />
       </> */}
       <Routes>
       <Route path="/adminlogin" element={<Adminlogin />} />
-
+      
       <Route path="/adminhome" element={
-        sessionStorage.getItem('email') == "" || sessionStorage.getItem('email') == null ?
+        sessionStorage.getItem('email') == "" || sessionStorage.getItem('email') == null  ?
         <Navigate to="/adminlogin"/> : <Adminhome /> 
       } />
 
@@ -59,6 +64,11 @@ const App = () => {
       <Route path="/requestedcaterers" element={
         sessionStorage.getItem('email') == "" || sessionStorage.getItem('email') == null ?
         <Navigate to="/adminlogin"/> : <RequestedCaterers /> 
+      } />
+      
+      <Route path="/viewpending" element={
+        sessionStorage.getItem('email') == "" || sessionStorage.getItem('email') == null ?
+        <Navigate to="/adminlogin"/> : <Viewpending /> 
       } />
       
       </Routes>

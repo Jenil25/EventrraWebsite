@@ -165,10 +165,10 @@ const RequestedCaterers = () => {
             </table>
           </center>
         </div>
-        <section className="back5">
+        {/* <section className="back5">
           <center> <NavLink to="/addcaterer" className="back5">Back</NavLink></center>
           <br />
-        </section>
+        </section> */}
       </div>
         );
 }

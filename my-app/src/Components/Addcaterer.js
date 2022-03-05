@@ -145,7 +145,7 @@ const Addcaterer = () => {
             <tbody>{catererData}</tbody>
           </table>
           <br /><br />
-      <button className="btn btn-success btn-lg" onClick={requestedcaterers}>Requested Caterers</button>
+      {/* <button className="btn btn-success btn-lg" onClick={requestedcaterers}>Requested Caterers</button> */}
         </center>
       </div>
       <section className="back4">
