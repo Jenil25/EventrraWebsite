@@ -4,11 +4,6 @@ import axios from "axios";
 import "./Assets/managecaterer.css"
 
 const Addcaterer = () => {
-  const navigate = useNavigate();
-  const requestedcaterers = async (e) => {
-    navigate('/RequestedCaterers');
-  }
-
   const [city, setCity] = useState([""]);
   useEffect(() => {
     const getCity = async () => {
@@ -23,7 +18,7 @@ const Addcaterer = () => {
 
   const [caterer, setCaterer] = useState([""]);
   const getCaterer = async () => {
-    const res = await fetch(
+    await fetch(
       "https://eventrra.000webhostapp.com/Admin/getAllCaterers.php",
       {
         method: "POST",
@@ -58,7 +53,7 @@ const Addcaterer = () => {
         }
       )
       const data = await res1.text();
-      if (data == 0) {
+      if (data == "success") {
         window.alert("Caterer deleted successfully !!");
         window.location.reload();
       }
@@ -76,7 +71,7 @@ const Addcaterer = () => {
     getCaterer();
   };
   
-  if (caterer[0].Name!=null) {
+  if (caterer!=undefined && caterer.length>0 && caterer[0]!=undefined && caterer[0].Name!=null) {
     var catererData = caterer.map((val, i) => (
       <tr key={i} className="table-light">
         <td key={val.CaId} className="clm1">

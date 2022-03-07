@@ -95,7 +95,7 @@ const RequestedVenues = () => {
       }
   };
 
-    if (rvenue.length >1) {
+    if (rvenue!=undefined && rvenue.length>0 && rvenue[0]!=undefined && rvenue[0].Name !=null) {
         var rvenueData = rvenue.map((val, i) => (
           <tr key={i} className="table-light">
             <td key={val.VId} className="clm1">

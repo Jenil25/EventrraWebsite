@@ -93,7 +93,7 @@ const RequestedCaterers = () => {
       }
   };
 
-    if (rcaterer[0].Name !=null) {
+    if (rcaterer!=undefined && rcaterer.length>0 && rcaterer[0]!=undefined && rcaterer[0].Name !=null) {
         var rcatererData = rcaterer.map((val, i) => (
           <tr key={i} className="table-light">
             <td key={val.CaId} className="clm1">

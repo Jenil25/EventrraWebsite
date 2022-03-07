@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate,NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import "./Assets/managevenue.css"
+import "./Assets/managevenue.css";
 
 const Addvenue = () => {
-  const navigate = useNavigate();
-
-  const requestedvenues = async (e) => {
-    navigate('/RequestedVenues');
-  }
   const [city, setCity] = useState([""]);
   useEffect(() => {
     const getCity = async () => {
@@ -19,7 +14,6 @@ const Addvenue = () => {
     };
     getCity();
   }, []);
-
 
   const [venue, setVenue] = useState([""]);
   const getVenue = async () => {
@@ -44,11 +38,11 @@ const Addvenue = () => {
         setVenue(data);
       });
   };
-
-  const [eventtype, setEventType] = useState([[""]]);
+  const [eventtype, setEventType] = useState([[]]);
   const getEventType = async () => {
-    console.log("CID from eventtype: "+temp);
-    const res = await fetch(
+    console.log("CID from eventtype: " + temp);
+    setEventType([]);
+    await fetch(
       "https://eventrra.000webhostapp.com/Admin/getAllVenueEventType.php",
       {
         method: "POST",
@@ -64,13 +58,10 @@ const Addvenue = () => {
         return response.json();
       })
       .then(function (data) {
-        console.log("From Eventtype : ");
-        console.log(data);
         setEventType(data);
-        
       });
   };
-  
+
   const deleteVenue = async (VID) => {
     if (window.confirm("Are you sure you want to delete?")) {
       const res1 = await fetch(
@@ -84,7 +75,7 @@ const Addvenue = () => {
             VId: VID,
           }),
         }
-      )
+      );
       const data = await res1.text();
       if (data == 0) {
         window.alert("Venue deleted successfully !!");
@@ -92,7 +83,6 @@ const Addvenue = () => {
       }
     }
   };
-
 
   let temp;
   const [cid, setCId] = useState(venue?.CId);
@@ -105,59 +95,82 @@ const Addvenue = () => {
     getVenue();
     getEventType();
   };
-  
-  if (venue.length>1) {
+  var venueEventTypes;
+  if (venue != undefined && venue.length > 0 && venue[0].length != 0) {
     var venueData = venue.map((val, i) => (
       <tr key={i} className="table-light">
         <td key={val.VId} className="clm1">
           {i + 1}
         </td>
         <td className="clm2">{val.Name}</td>
-        <td className="clm3">{val.Line1},{val.Line2}</td>
+        <td className="clm3">
+          {val.Line1},{val.Line2}
+        </td>
         <td className="clm4">{val.Landmark}</td>
         <td className="clm5">{val.Capacity}</td>
         <td className="clm6">{val.Email}</td>
         <td className="clm7">{val.Contact}</td>
         <td className="clm8">{val.OwnerName}</td>
         <td className="clm9">
-        
-            {eventtype.map((val1, j) => (
-            // console.log(j),
-          <select id="select2"
-          value={ eventtype }>
-             {
-            val1.map((val2,k) => (
-                <option value={k}>{val2}</option>
-              ))
+          {(() => {
+            if (
+              eventtype != undefined &&
+              eventtype.length > 0 &&
+              eventtype[0].length != 0
+            ) {
+              console.log("eventtype.length:" + eventtype.length);
+              console.log(eventtype);
+              console.log("eventtype[0]=" + eventtype[0]);
+              console.log("eventtype[0].length=" + eventtype[0].length);
+              venueEventTypes = (
+                <select id="selectEventType" value={eventtype[i]}>
+                  {eventtype[i].map((val1, j) => (
+                    <option value={val1}>{val1}</option>
+                  ))}
+                </select>
+              );
+            } else {
+              venueEventTypes = <select id="selectEventType" value=""></select>;
             }
-              </select>             
-            ))
-              
-            }
-   
-          </td>
+          })()}
+
+          {venueEventTypes}
+        </td>
         <td className="clm10">
-          <button className="btn btn-danger" onClick={(e) => { deleteVenue(val.VId) }}>Delete</button>
+          <button
+            className="btn btn-danger"
+            onClick={(e) => {
+              deleteVenue(val.VId);
+            }}
+          >
+            Delete
+          </button>
         </td>
       </tr>
     ));
   } else {
-   var venueData = (
+    var venueData = (
       <tr className="table-light">
-        <td className="clm1" colSpan="10"><center>No Records Found</center></td>
+        <td className="clm1" colSpan="10">
+          <center>No Records Found</center>
+        </td>
       </tr>
     );
   }
 
-
   return (
     <div className="container-managevenue">
-      <br /><br /><center><h1 className="label3">All Venues</h1></center>
-      <br /><br />
+      <br />
+      <br />
+      <center>
+        <h1 className="label3">All Venues</h1>
+      </center>
+      <br />
+      <br />
       <div>
         <center>
           <b>City :</b>&emsp;
-           <select
+          <select
             id="select1"
             value={cid}
             onChange={(e) => {
@@ -176,34 +189,59 @@ const Addvenue = () => {
       </div>
       <br />
       <div>
-        <br/>
+        <br />
         <center>
           <table bordered className="table table-hover">
             <thead>
               <tr className="table-dark">
-                <th className="clm1" scope="col">#</th>
-                <th className="clm2" scope="col">Name</th>
-                <th className="clm3" scope="col">Address</th>
-                <th className="clm4" scope="col">Landmark</th>
-                <th className="clm5" scope="col">Capacity</th>
-                <th className="clm6" scope="col">Email</th>
-                <th className="clm7" scope="col">Contact</th>
-                <th className="clm8" scope="col">OwnerName</th>
-                <th className="clm9" scope="col">EventType</th>
-                <th className="clm10" scope="col">Action</th>
+                <th className="clm1" scope="col">
+                  #
+                </th>
+                <th className="clm2" scope="col">
+                  Name
+                </th>
+                <th className="clm3" scope="col">
+                  Address
+                </th>
+                <th className="clm4" scope="col">
+                  Landmark
+                </th>
+                <th className="clm5" scope="col">
+                  Capacity
+                </th>
+                <th className="clm6" scope="col">
+                  Email
+                </th>
+                <th className="clm7" scope="col">
+                  Contact
+                </th>
+                <th className="clm8" scope="col">
+                  OwnerName
+                </th>
+                <th className="clm9" scope="col">
+                  EventType
+                </th>
+                <th className="clm10" scope="col">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>{venueData}</tbody>
           </table>
-          <br /><br />
-         {/* <button className="btn btn-success btn-lg" onClick={requestedvenues}>Requested Venues</button> */}
+          <br />
+          <br />
         </center>
       </div>
       <section className="back3">
-        <center> <NavLink to="/adminhome" className="back3">Back</NavLink></center>
+        <center>
+          {" "}
+          <NavLink to="/adminhome" className="back3">
+            Back
+          </NavLink>
+        </center>
         <br />
       </section>
     </div>
   );
 };
-export default Addvenue
+export default Addvenue;
