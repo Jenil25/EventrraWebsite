@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from "react";
-import { NavLink,useNavigate } from 'react-router-dom'
+import React, {useState} from "react";
+import {useNavigate } from 'react-router-dom'
 import './Assets/adminLogin.css';
 
 const Adminlogin = () => {
@@ -24,9 +24,8 @@ const Adminlogin = () => {
     );
     const data = await res.text();
     if (data == "success") {
-      sessionStorage.setItem('email',email);
-      // window.$login=email;
-      window.alert("Admin Login successfull");
+        localStorage.setItem('email', email);
+       window.alert("Admin Login successfull");
       navigate('/adminhome');
     } else {
       window.alert("Invalid email/password");

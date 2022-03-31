@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { NavLink,useNavigate } from "react-router-dom";
 import axios from "axios";
 import './Assets/requestedcaterer.css'
 
@@ -33,7 +32,6 @@ const RequestedCaterers = () => {
         return response.json();
       })
       .then(function (data) {
-          console.log(data);
         setRcaterer(data);
       });
   };
@@ -42,7 +40,6 @@ const RequestedCaterers = () => {
   const [cid, setCId] = useState(rcaterer?.CId);
   useEffect(() => {
     setCId(rcaterer?.CId);
-    // getRcaterer();
   }, [rcaterer?.CId]);
 
 
@@ -93,7 +90,7 @@ const RequestedCaterers = () => {
       }
   };
 
-    if (rcaterer[0].Name !=null) {
+    if (rcaterer!=undefined && rcaterer.length>0 && rcaterer[0]!=undefined && rcaterer[0].Name !=null) {
         var rcatererData = rcaterer.map((val, i) => (
           <tr key={i} className="table-light">
             <td key={val.CaId} className="clm1">
@@ -123,7 +120,6 @@ const RequestedCaterers = () => {
  
     return (
         <div className="container-requestedcaterer">
-        <br /><br /><center><h1 className="label5">Requested caterers</h1></center>
         <br/><br/>
         <div>
         <center>
@@ -165,10 +161,6 @@ const RequestedCaterers = () => {
             </table>
           </center>
         </div>
-        {/* <section className="back5">
-          <center> <NavLink to="/addcaterer" className="back5">Back</NavLink></center>
-          <br />
-        </section> */}
       </div>
         );
 }

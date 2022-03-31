@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { NavLink,useNavigate } from "react-router-dom";
 import axios from "axios";
 import './Assets/requestedvenue.css'
 
@@ -43,7 +42,6 @@ const RequestedVenues = () => {
   const [cid, setCId] = useState(rvenue?.CId);
   useEffect(() => {
     setCId(rvenue?.CId);
-    // getRVenue();
   }, [rvenue?.CId]);
 
 
@@ -88,14 +86,13 @@ const RequestedVenues = () => {
         }
       )
       const data = await res2.text();
-      // console.log(data);
       if (data == "success") {
         window.alert("Venue accepted successfully !!");
         window.location.reload();
       }
   };
 
-    if (rvenue.length >1) {
+    if(rvenue!=undefined && rvenue.length>0 && rvenue[0]!=undefined && rvenue[0].Name !=null) {
         var rvenueData = rvenue.map((val, i) => (
           <tr key={i} className="table-light">
             <td key={val.VId} className="clm1">
@@ -126,7 +123,6 @@ const RequestedVenues = () => {
  
     return (
         <div className="container-requestedvenue">
-        <br /><br /><center><h1 className="label5">Requested Venues</h1></center>
         <br/><br/>
         <div>
         <center>
@@ -169,10 +165,6 @@ const RequestedVenues = () => {
             </table>
           </center>
         </div>
-        {/* <section className="back5">
-          <center> <NavLink to="/addvenue" className="back5">Back</NavLink></center>
-          <br />
-        </section> */}
       </div>
         );
 }

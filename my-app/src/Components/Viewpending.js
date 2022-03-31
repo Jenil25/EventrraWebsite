@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import RequestedVenues from "./RequestedVenues";
 import RequestedCaterers from "./RequestedCaterers";
-import RequestedEventType from "./RequestedEventType";
+import "./Assets/viewpending.css"
 
 const Viewpending = () => {
     const [showVenue,setShowVenue]=React.useState(false);
     const [showCaterer,setShowCaterer]=React.useState(false);
-    const [showEventType,setShowEventType]=React.useState(false);
-    var x1=0,x2=0,x3=0;
+    
+    var x1=0,x2=0;
     const viewvenuerequests = async (e) => {
      if(x1==0)
      {
@@ -34,27 +33,26 @@ const Viewpending = () => {
         x2=0;
       }
     }
-    const vieweventtyperequests = async (e) => {    
-        if(x3==0)
-         {
-            setShowEventType(true);
-            x3=1;
-         } 
-          else if(x3==1)
-          {
-            setShowEventType(false);
-            x3=0;
-          }
-        }    
-    return(
-    <div>
-         <button className="card-btn" onClick={viewvenuerequests}>Requested Venues</button>
-         {showVenue ? <RequestedVenues/> : null }
-         <button className="card-btn" onClick={viewcatererrequests}>Requested Caterers</button>
-         {showCaterer ? <RequestedCaterers/> : null }
-         {/* <button className="card-btn" onClick={vieweventtyperequests}>Requested Event-Types</button>
-         {showEventType ? <RequestedEventType/> : null } */}
 
+    return(
+    <div className="container-viewpending">
+      <center>
+       <br /><br /><center><h1 className="label7">Pending Requests</h1></center>
+      <br /><br />
+        <div>
+         <button className="btn btn-primary" id = "btnfrompending" onClick={viewvenuerequests}>Requested Venues</button>
+         {showVenue ? <RequestedVenues/> : null }
+         <br/><br/>
+
+         <button className="btn btn-warning" id = "btnfrompending" onClick={viewcatererrequests}>Requested Caterers</button>
+         {showCaterer ? <RequestedCaterers/> : null }
+         </div>
+
+      <section className="back7">
+        <center> <NavLink to="/adminhome" className="back4">Back</NavLink></center>
+        <br />
+      </section>
+      </center>
     </div>
     );
 }

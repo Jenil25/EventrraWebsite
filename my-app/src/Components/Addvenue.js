@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate,NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "./Assets/managevenue.css"
 
 const Addvenue = () => {
-  const navigate = useNavigate();
-
-  const requestedvenues = async (e) => {
-    navigate('/RequestedVenues');
-  }
   const [city, setCity] = useState([""]);
   useEffect(() => {
     const getCity = async () => {
@@ -20,11 +15,8 @@ const Addvenue = () => {
     getCity();
   }, []);
 
-
   const [venue, setVenue] = useState([""]);
   const getVenue = async () => {
-    console.log("TEMP:");
-    console.log(temp);
     const res = await fetch(
       "https://eventrra.000webhostapp.com/Admin/getAllVenues.php",
       {
@@ -44,10 +36,9 @@ const Addvenue = () => {
         setVenue(data);
       });
   };
-
   const [eventtype, setEventType] = useState([[""]]);
   const getEventType = async () => {
-    console.log("CID from eventtype: "+temp);
+    setEventType([]);
     const res = await fetch(
       "https://eventrra.000webhostapp.com/Admin/getAllVenueEventType.php",
       {
@@ -64,10 +55,7 @@ const Addvenue = () => {
         return response.json();
       })
       .then(function (data) {
-        console.log("From Eventtype : ");
-        console.log(data);
         setEventType(data);
-        
       });
   };
   
@@ -93,7 +81,6 @@ const Addvenue = () => {
     }
   };
 
-
   let temp;
   const [cid, setCId] = useState(venue?.CId);
   useEffect(() => {
@@ -105,39 +92,51 @@ const Addvenue = () => {
     getVenue();
     getEventType();
   };
-  
-  if (venue.length>1) {
+  var venueEventTypes;
+  if (venue != undefined && venue.length > 0 && venue[0].length != 0) {
     var venueData = venue.map((val, i) => (
       <tr key={i} className="table-light">
         <td key={val.VId} className="clm1">
           {i + 1}
         </td>
         <td className="clm2">{val.Name}</td>
-        <td className="clm3">{val.Line1},{val.Line2}</td>
+        <td className="clm3">
+          {val.Line1},{val.Line2}
+          </td>
         <td className="clm4">{val.Landmark}</td>
         <td className="clm5">{val.Capacity}</td>
         <td className="clm6">{val.Email}</td>
         <td className="clm7">{val.Contact}</td>
         <td className="clm8">{val.OwnerName}</td>
         <td className="clm9">
-        
-            {eventtype.map((val1, j) => (
-            // console.log(j),
-          <select id="select2"
-          value={ eventtype }>
-             {
-            val1.map((val2,k) => (
-                <option value={k}>{val2}</option>
-              ))
+        {(() => {
+            if (
+              eventtype != undefined &&
+              eventtype.length > 0 &&
+              eventtype[0].length != 0
+            ) {
+              venueEventTypes = (
+                <select id="selectEventType" value={eventtype[i]}>
+                  {eventtype[i].map((val1, j) => (
+                    <option value={val1}>{val1}</option>
+                  ))}
+                </select>
+              );
+            } else {
+              venueEventTypes = <select id="selectEventType" value=""></select>;
             }
-              </select>             
-            ))
-              
-            }
-   
+          })()}
+
+          {venueEventTypes}
           </td>
         <td className="clm10">
-          <button className="btn btn-danger" onClick={(e) => { deleteVenue(val.VId) }}>Delete</button>
+          <button 
+          className="btn btn-danger" 
+          onClick={(e) => 
+          { deleteVenue(val.VId) 
+          }}>
+            Delete
+            </button>
         </td>
       </tr>
     ));
@@ -196,7 +195,6 @@ const Addvenue = () => {
             <tbody>{venueData}</tbody>
           </table>
           <br /><br />
-         {/* <button className="btn btn-success btn-lg" onClick={requestedvenues}>Requested Venues</button> */}
         </center>
       </div>
       <section className="back3">

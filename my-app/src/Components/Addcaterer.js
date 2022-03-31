@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate,NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "./Assets/managecaterer.css"
 
 const Addcaterer = () => {
-  const navigate = useNavigate();
-  const requestedcaterers = async (e) => {
-    navigate('/RequestedCaterers');
-  }
-
   const [city, setCity] = useState([""]);
   useEffect(() => {
     const getCity = async () => {
@@ -76,7 +71,7 @@ const Addcaterer = () => {
     getCaterer();
   };
   
-  if (caterer[0].Name!=null) {
+  if  (caterer!=undefined && caterer.length>0 && caterer[0]!=undefined && caterer[0].Name!=null) {
     var catererData = caterer.map((val, i) => (
       <tr key={i} className="table-light">
         <td key={val.CaId} className="clm1">
@@ -145,7 +140,6 @@ const Addcaterer = () => {
             <tbody>{catererData}</tbody>
           </table>
           <br /><br />
-      {/* <button className="btn btn-success btn-lg" onClick={requestedcaterers}>Requested Caterers</button> */}
         </center>
       </div>
       <section className="back4">

@@ -1,5 +1,4 @@
 .container-managecaterer{
-    /* height: 650px; */
     background: #dedede;
 }
 .label4{
@@ -19,7 +18,6 @@ b{
 }
 .table{
     width:1000px;
-    /* font-size: 20px; */
 }
 .clm1,.clm2,.clm3,.clm4,.clm5,.clm6,.clm7{
     width:0.1%;
